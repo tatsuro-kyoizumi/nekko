@@ -1,0 +1,70 @@
+
+
+<div class="hero-body">
+    <div class="container has-text-centered">
+        <div class="column is-4 is-offset-4">
+            <h3 class="title has-text-black">プロフィール編集</h3>
+            <hr class="login-hr">
+
+
+            <div class="box">
+                <figure class="avatar">
+                    <img src="https://placehold.it/128x128">
+                </figure>
+
+              <%= form_for(@user) do |f| %>
+
+              <div class="field">
+                <div class="control has-text-left">
+
+                  <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "avatar" %>
+
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="control has-icons-left">
+                  <%= f.text_field :name, class:"input is-medium", autofocus: true, autocomplete: "name", placeholder: "Username" %>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </div>
+              </div>
+
+
+            <div class="field">
+              <%#= f.label :password, class:"label" %>
+              <div class="control has-icons-left">
+              <%= f.text_field :introduction, class: "textarea is-medium", autocomplete: "introduction", placeholder: "Introduction" %>
+              <span class="icon is-left is-small">
+                <i class="fa fa-file-alt"></i>
+              </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control has-icons-left">
+                <%= f.text_field :user_address, class:"input is-medium", autocomplete:"user_address" %>
+                <span class="icon is-left is-small">
+                  <i class="fas fa-map-marker-alt"></i>
+                </span>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="actions">
+              <%= f.submit "編集を保存", class: "button is-danger is-medium is-fullwidth is-block" %>
+            </div>
+          <% end %>
+
+
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+<script async type="text/javascript" src="../js/bulma.js"></script>

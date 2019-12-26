@@ -1,0 +1,52 @@
+<!-- <div class="columns">
+    <div class="column is-4 is-offset-4"> -->
+      <h1 class="title has-text-centered">新規投稿</h1>
+
+      <%= form_with model: post do |f| %>
+      <div class="form has-text-centered">
+        <!-- キャプションパート -->
+        <div class="field">
+          <div class="control">
+          <label for="caption">説明</label>
+
+          <%= f.text_field :caption, class:"input is-medium is-primary" %>
+          </div>
+        </div>
+
+        <!-- 画像投稿パート -->
+        <div class="field">
+          <div class="control">
+          <!-- <label class="label" for="post_image"> -->
+            <!-- <i class="far fa-images"></i> -->
+            <%= f.fields_for :post_pictures do |post_picture| %>
+            <p class="post_image">
+              <%= render partial: 'posts/post_picture_fields', f:post_picture %>
+            </p>
+            <% end %>
+
+            <p><%#= link_to_add_association "写真を追加", f, :post_pictures %></p>
+
+          </div>
+        </div>
+
+        <!-- 場所パート -->
+        <div class="field">
+          <div class="control">
+            <label for="address">ロケーション</label>
+            <%= f.text_field :address, class:"input is-primary is-medium", placeholder:"（任意）" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.label :post, "タグ" %>
+            <%= f.text_field :tag_list, value: post.tag_list.join(','), class:"input is-primary is-small" %>
+            <%#= f.text_field :tag_list, value: post.tag_list.join(','), class: "input is-primary is-medium" %>
+            </div>
+          </div>
+
+          <%= f.submit '投稿', class:"button is-primary" %>
+
+
+      </div>
+      <% end %>

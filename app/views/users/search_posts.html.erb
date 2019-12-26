@@ -1,0 +1,16 @@
+<div class="hero is-medium is-primary">
+<h1>ここから</h1>
+
+
+<%# @locations.each do |location| %>
+<%#= attachment_image_tag location, :profile_image, size:"100x100" %>
+<%#= location.name %>
+<%#= attachment_image_tag post, :post_image, size:"100x100" %>
+<%#= post.caption %>
+<%# end %>
+
+<% @posts.each do |post| %>
+<%= attachment_image_tag post, :post_image, size: "100x100" %>
+<%= post.caption %>
+<% end %>
+</div>

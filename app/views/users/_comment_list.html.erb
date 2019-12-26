@@ -1,0 +1,18 @@
+<% post.post_comments.each do |post_comment| %>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+          <%= attachment_image_tag post_comment.user, :profile_image %>
+          </p>
+        </figure>
+
+        <div class="media-content">
+          <div class="content">
+            <p><strong><%= post_comment.user.name %></strong>
+              <br>
+              <%= post_comment.comment %></p>
+          </div>
+        </div>
+
+      </article>
+<% end %>

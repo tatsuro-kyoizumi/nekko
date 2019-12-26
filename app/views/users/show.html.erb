@@ -1,0 +1,322 @@
+<div class="hero is-warning is-small" style="margin-left:-12px;">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title"><%= @user.name %></h1>
+      <h2 class="subtitle"><%= @user.introduction %></h2>
+
+      <% if @user.id == current_user.id %>
+      <%= link_to 'プロフィール編集', edit_user_path(@user.id) %>
+      <% end %>
+
+      <figure class="image is-128x128">
+          <img class="is-rounded"><%= attachment_image_tag @user, :profile_image, fallback:"no_image.jpg", size: "100x100" %>
+      </figure>
+
+
+    </div>
+  </div>
+</div>
+
+<section class="level">
+  <div class="level-left"></div>
+  <div class="level-right">
+    <div class="level-items tabs">
+      <ul id="tabs">
+        <li class="tab is-active" data-target="#tab1"><a>投稿一覧</a></li>
+        <li class="tab" data-target="#tab2"><a>ぬっこ友の投稿</a></li>
+        <li class="tab" data-target="#tab3"><a>お気に入り写真</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="level-right">
+    <div class="level-item">
+      <!-- <a class="button is-greylight">フォロー</a> -->
+      <%= render 'follow_form', user: @user %>
+    </div>
+  </div>
+</section>
+
+<main class="columns">
+  <!-- <div class="column is-1"></div> -->
+  <div class="submenu column is-3 is-offset-1">
+    <aside class="box has-text-centered">
+      <!-- 猫ねこネコ -->
+      <% if @user.id == current_user.id %>
+      <%= link_to '近くの投稿を探す', search_posts_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
+      <%= link_to '近くのユーザーを探す', search_users_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
+      <%#= search_form_for @q do |f| %>
+      <%#= f.search_field :name_cont %>
+      <%#= f.submit '検索' %>
+      <%# end %>
+
+
+      <% end %>
+    </aside>
+
+    <aside class="menu box">
+      <%#= render 'new', user: current_user, post: @post %>
+      <%#= render partial: "posts/new", locals: { post: @post, post_picture: @post_picture } %>
+    </aside>
+  </div>
+
+  <!-- 投稿一覧 -->
+
+  <div class="column is-7">
+    <div class="tab-content">
+
+<!-- ここからtab1 -->
+      <div id="tab1" class="tab-pane is-block">
+    <% @posts.each do |post| %>
+    <article class="box media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= attachment_image_tag @user, :profile_image, fallback:"no_image.jpg", size:"64x64" %>
+          <!-- <img src="http://placehold.it/128x128"> -->
+        </p>
+      </figure>
+
+      <div class="media-content">
+        <div class="content">
+          <p><strong><%= post.user.name %></strong>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+            <% if @user.id == current_user.id %>
+            <%= link_to edit_post_path(post.id) do %>
+            <i class="fas fa-edit"></i>
+            <% end %>
+            <hr>
+
+
+              <div class="columns is-multilined">
+                <% post.post_pictures.each do |post_picture| %>
+                  <div class="column is-2">
+                  <%= attachment_image_tag post_picture, :image, size:"100x100" %>
+                  </div>
+                <% end %>
+              </div>
+
+
+
+
+            <%= attachment_image_tag post, :post_image, size:"100x100" %><br>
+
+            <%= post.caption %><br>
+            <small><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></small><br>
+
+            <% if post.tag_list.present? %>
+            <small><span class="tag is-light">
+              <%= post.tag_list %>
+            </span></small>
+            <% else %>
+            <small><span class="tag is-light">現在タグはありません</span></small>
+            <% end %>
+
+
+
+            <% end %>
+        </div>
+
+        <% post.post_comments.each do |post_comment| %>
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+              <%= attachment_image_tag post_comment.user, :profile_image, fill:"no_image.jpg" %>
+              </p>
+            </figure>
+
+            <div class="media-content">
+              <div class="content">
+                <p><strong><%= post_comment.user.name %></strong>
+                  <br>
+                  <%= post_comment.comment %><br>
+                  <small><%= post_comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+                </p>
+              </div>
+            </div>
+
+          </article>
+        <% end %>
+
+
+          <!-- コメント入力 -->
+          <%= form_for [post, @post_comment] do |f| %>
+          <div class="field">
+            <div class="control">
+                <%= f.text_area :comment, class:"input is-small", placeholder:"コメント" %>
+            </div>
+          </div>
+
+          <%= f.submit "コメントする", class:"button is-primary is-small" %>
+          <% end %>
+        </div>
+    </article>
+    <% end %>
+  </div>
+  <!-- ここまでtab1 -->
+
+
+
+  <!-- ここからtab2 -->
+  <div id="tab2" class="tab-pane">
+
+    <% @following_posts.each do |f| %>
+    <article class="box media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <%= attachment_image_tag @user, :profile_image, fallback:"no_image.jpg", size:"64x64" %>
+        </p>
+      </figure>
+
+      <div class="media-content">
+        <div class="content">
+          <p><strong><%= f.user.name %></strong><br>
+            <hr>
+            <%= attachment_image_tag f, :post_image, size:"100x100" %><br>
+            <%= f.caption %><br>
+        </div>
+
+        <% f.post_comments.each do |post_comment| %>
+        <article class="media">
+          <figure class="media-left">
+            <p class="image is-48x48">
+            <%= attachment_image_tag post_comment.user, :profile_image, fill:"no_image.jpg" %>
+            </p>
+          </figure>
+
+          <div class="media-content">
+            <div class="content">
+              <p><strong><%= post_comment.user.name %></strong>
+                <br>
+                <%= post_comment.comment %></p>
+            </div>
+          </div>
+
+        </article>
+      <% end %>
+
+        <!-- コメント入力 -->
+        <%= form_for [f, @post_comment] do |f| %>
+        <div class="field">
+          <div class="control">
+              <%= f.text_area :comment, class:"input is-small", placeholder:"コメント" %>
+          </div>
+        </div>
+
+        <%= f.submit "コメントする", class:"button is-primary is-small" %>
+        <% end %>
+      </div>
+  </article>
+
+    <% end %>
+  </div>
+  <!-- ここまでtab2 -->
+
+
+
+  <!-- ここからtab3 -->
+  <div id="tab3" class="tab-pane">
+    <div class="columns is-multiline">
+      <% @favorites.each do |favorite| %>
+      <div class="column is-2">
+        <%= attachment_image_tag favorite.post, :post_image %>
+      </div>
+      <% end %>
+    </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+    </div>
+  </div>
+<!-- ここまでtab3 -->
+
+  </div>
+<!-- ここまでtabコンテントでくくる -->
+
+<!-- ランキングトップ3 -->
+<!-- <div class="ranking column is-2">
+  <%#= render 'ranking', all_ranks: @all_ranks %>
+</div> -->
+
+</div>
+<!-- ここまでランキング -->
+</main>
+
+
+
+<!--
+<div class="container is-fluid">
+  <div class="columns is-centered">
+    <div class="column is-centered is-12">
+      <h1 class="title has-text-centered">My Profile</h1>
+
+      <div class="box is-centered">
+            <figure class="avatar">
+                <img src="https://placehold.it/128x128">
+            </figure>
+        <p><%#= @user.name %></p>
+        <p><%#= @user.introduction %></p>
+        <%# if @user.id == current_user.id %>
+        <p><%#= link_to '編集する', edit_user_path(@user.id), class:"button is-danger" %></p>
+        <%# end %>
+      </div>
+  </div>
+</div>
+  <div class="columns">
+    <!-- 左プロフィール -->
+    <!-- <div class="column has-text-centered is-3">
+      <figure>
+          <figure class="avatar">
+              <img src="https://placehold.it/128x128">
+      </figure>
+      <p><%#= current_user.name %></p>
+    </div> -->
+
+    <!-- 右ランキング、一覧などエリア -->
+    <!-- <div class="column has-text-centered is-9">
+
+
+      <!-- 週間ランキング -->
+      <!-- <div class="hero is-danger">
+        <h1 class="title">週間ランキング</h1>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third">
+          <p>1位</p>
+        </div>
+        <div class="column is-one-third">
+          <p>2位</p>
+        </div>
+        <div class="column is-one-third">
+          <p>3位</p>
+        </div>
+      </div> -->
+
+      <!-- <div class="hero is-primary">
+        <h1 class="title">フォローユーザーの投稿一覧</h1>
+      </div>
+
+
+      <div class="hero is-danger is-bold">
+          <h1 class="title">新着投稿一覧</h1>
+        </div> -->
+
+
+        <%# @posts.each do |post| %>
+        <%#= post.caption %>
+        <%#= attachment_image_tag post, :post_image %>
+        <%# end %>
+    <!-- </div>
+
+
+
+    </div>
+
+
+
+    </div> -->

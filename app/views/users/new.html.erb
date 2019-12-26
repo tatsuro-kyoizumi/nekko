@@ -1,0 +1,150 @@
+<!-- <style>
+body {
+    margin: 0;
+}
+
+.blank {
+    height: 200vh;
+    background-color: yellow;
+}
+
+.fade-out {
+    background-color: blue;
+}
+
+.fade-in {
+    background-color: red;
+}
+
+</style>
+
+<div class="blank">
+  <h1>Awesome Site</h1>
+  <p>fugafuga</p>
+</div>
+<div class="box-wrapper">
+  <div class="box fade-out">box1</div>
+  <div class="box fade-out">box2</div>
+  <div class="box fade-out">box3</div>
+  <div class="box fade-out">box4</div>
+  <div class="box fade-out">box5</div>
+  <div class="box fade-out">box6</div>
+  <div class="box fade-out">box7</div>
+  <div class="box fade-out">box8</div>
+  <div class="box fade-out">box9</div>
+  <div class="box fade-out">box10</div>
+</div>
+<div class="blank">空白</div>
+
+<script>
+let contents = document.querySelectorAll('.fade-out');
+let windowIn = window.innerHeight;
+console.log('windowの高さ: ' + windowIn);
+let nowPosition;
+let myClassName = 'fade-in';
+
+
+for (var i = 0; contents.length > i; i++) {
+    let content = contents[i];
+    let contentPosition = content.getBoundingClientRect().top;
+    console.log('contentの位置: ' + contentPosition);
+
+    randomColor(content);
+
+    window.addEventListener('scroll', function () {
+        nowPosition = window.pageYOffset;
+        console.log('現在位置: ' + nowPosition);
+        if (content.classList.contains(myClassName) === false) {
+            if (windowIn + nowPosition > contentPosition + (windowIn / 4)) {
+                content.classList.add(myClassName);
+            }
+        }
+    }, false)
+}
+
+
+function randomRGB() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    let rgb = [r, g, b];
+    return rgb;
+}
+
+function randomColor(element) {
+    let rgb = randomRGB();
+    let r = rgb[0];
+    let g = rgb[1];
+    let b = rgb[2];
+    element.style.backgroundColor = 'rgba(' + r + ', ' + g + ',' + b + ', .5)';
+}
+
+</script> -->
+<button type="button" class="button show-modal" data-target="my-modal">モーダル表示</button>
+
+<div class="modal" id="my-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">確認</p>
+            <button class="delete" aria-label="close" data-target="my-modal"></button>
+        </header>
+        <section class="modal-card-body">
+            本当に削除してよろしいですか。
+        </section>
+        <footer class="modal-card-foot">
+            <button type="button" class="button is-danger">はい</button>
+        </footer>
+    </div>
+</div>
+
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+  <div class="tabs-content" data-content>
+      <ul>
+          <li class="is-active">
+              <h1>Pictures</h1>
+          </li>
+          <li>
+              <h1>Music</h1>
+          </li>
+          <li>
+              <h1>Videos</h1>
+          </li>
+          <li>
+              <h1>Documents</h1>
+          </li>
+      </ul>
+  </div>
+</div>
+<body class="drawer drawer--left">
+    <header role="banner">
+      <button type="button" class="drawer-toggle drawer-hamburger">
+        <span class="sr-only">toggle navigation</span>
+        <span class="drawer-hamburger-icon"></span>
+      </button>
+      <nav class="drawer-nav" role="navigation">
+        <ul class="drawer-menu">
+          <li><a class="drawer-brand" href="#">Brand</a></li>
+          <li><a class="drawer-menu-item" href="#">Nav1</a></li>
+          <li><a class="drawer-menu-item" href="#">Nav2</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main role="main">
+      <!-- Page content -->
+    </main>
+
+    <script>
+      for (const element of document.querySelectorAll('.modal .delete, .show-modal')) {
+    element.addEventListener('click', e => {
+        const modalId = element.dataset.target;
+        const modal = document.getElementById(modalId);
+        modal.classList.toggle('is-active');
+    });
+}
+
+
+    </script>
+  </body>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nekko</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%#= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'load' %>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/inbox.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+    <!-- jquery & iScroll -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="dist/jquery.fadethis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+    <!-- drawer.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  </head>
+
+  <!-- javascriptが正常に動かないため、data-turbolinks="false"を追加 -->
+  <body data-turbolinks="false">
+    <div class="columns">
+      <div class="column is-2 sidemenu">
+        <div class="navbar-brand">
+          <a href="#" class="navbar-item title is-marginless">猫はぶ</a>
+        </div>
+      <aside class="menu">
+      <p class="menu-label">
+        メニュー
+      </p>
+      <ul class="menu-list">
+        <li><%= link_to  users_path do %><i class="fas fa-home"></i>&nbsp;ホーム</li>
+        <% end %>
+        <li><%= link_to user_path(current_user.id) do %><i class="fas fa-user"></i>&nbsp;マイページ</li>
+        <% end %>
+        <li><%= link_to new_post_path do %><i class="far fa-clipboard"></i>&nbsp;投稿する</li>
+        <% end %>
+        <li><%= link_to search_users_user_path(current_user.id) do %><i class="fas fa-search"></i>&nbsp;近くのユーザーを検索</li>
+        <% end %>
+
+        <li><%= link_to search_posts_user_path(current_user.id) do %><i class="fas fa-search-plus"></i>&nbsp;近くの投稿を検索</li>
+        <% end %>
+
+        <li><a>メッセージ</a></li>
+
+      </ul>
+
+    </aside>
+    </div>
+
+  <div class="column is-10" style="padding-left:0px; padding-bottom:0px;">
+          <nav class="navbar is-warning" role="navigation" aria-label="Main navigation">
+          <div class="container">
+
+              <button class="button navbar-burger" data-target="navMenu">
+                <span></span>
+                <span></span>
+
+              </button>
+            </div>
+            <div class="navbar-menu" id="navMenu">
+              <div class="navbar-end">
+                <% if user_signed_in? %>
+                <%= link_to 'ホーム', users_path, class:"navbar-item" %>
+                <%= link_to 'ログアウト', destroy_user_session_path, {method: :delete, class:"navbar-item"} %>
+                <%= link_to 'マイページ', user_path(current_user.id), class: "navbar-item" %>
+
+
+                <% else %>
+                <%= link_to 'ログイン', new_user_session_path, class:"navbar-item" %>
+                <%= link_to '新規登録', new_user_registration_path, class:"navbar-item" %>
+                <% end %>
+              </div>
+
+            </div>
+
+        </nav>
+
+
+    <%= yield %>
+
+
+        </div>
+  </body>
+</html>

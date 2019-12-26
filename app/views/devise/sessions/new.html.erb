@@ -1,0 +1,54 @@
+
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-black">ログイン</h3>
+                <hr class="login-hr">
+                <p class="subtitle has-text-black">未登録の方は<a href="/users/sign_up">こちら</a></p>
+
+                <div class="box">
+                    <figure class="avatar">
+                        <img src="https://placehold.it/128x128">
+                    </figure>
+
+
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="field">
+                  <%= f.label :email, class:"label", for:"textInput" %>
+                  <div class="control has-icons-left">
+                  <%= f.email_field :email, id:"textInput", class: "input is-medium", autofocus: true, autocomplete: "email", placeholder: "Your Email" %>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
+                  </span>
+                </div>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password, class:"label" %>
+                  <div class="control has-icons-left">
+                  <%= f.password_field :password, class: "input is-medium", autocomplete: "current-password", placeholder: "Your Password" %>
+                  <span class="icon is-left is-small">
+                    <i class="fa fa-key"></i>
+                  </span>
+                  </div>
+                </div>
+
+                <% if devise_mapping.rememberable? %>
+                  <div class="field">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </div>
+                <% end %>
+
+                <div class="actions">
+                  <%= f.submit "ログイン", class: "button is-danger is-medium is-fullwidth is-block" %>
+                </div>
+              <% end %>
+
+              <%= render "devise/shared/links" %>
+            </div>
+            </div>
+            </div>
+
+
+
+<script async type="text/javascript" src="../js/bulma.js"></script>

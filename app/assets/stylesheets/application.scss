@@ -1,0 +1,77 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bulma";
+ @import 'bulma/css/bulma.min.css';
+ @import url('https://fonts.googleapis.com/css?family=Indie+Flower|Kosugi+Maru&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap');
+
+ html, body{
+   height:100%;
+   font-family: 'M PLUS Rounded 1c', sans-serif;
+
+  //  font-family: 'Indie Flower', cursive;
+  //  font-family: 'Kosugi Maru', sans-serif;
+ }
+
+ .sidemenu{
+   background-color:black;
+   min-height: 100vh;
+   
+
+ }
+
+ main{
+   background-color:#eeeeee;
+ }
+
+.tab-pane{
+  display:none;
+}
+
+.card{
+  height:100%;
+}
+
+.is-horizontal-center{
+  justify-content: center;
+}
+
+.submenu .button{
+  width:80%;
+  margin-bottom:2px;
+}
+
+.fade-out {
+  opacity : 0.1;
+  transform : translate(0, 50px);
+  transition : all 500ms;
+}
+
+.fade-in {
+  opacity : 1;
+  transform : translate(0, 0);
+}
+
+// .fadeIn{
+//   opacity:0;
+//   transform: translateY(20px);
+//   transition: all 1s;
+// }
+
+// .show{
+//   display:block;
+
+// }

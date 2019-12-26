@@ -1,0 +1,18 @@
+<div class="box has-text-centered">
+  <h4 class="subtitle">今週のトップ3</h4>
+  <hr>
+
+  <% all_ranks.each.with_index(1) do |rank, i| %>
+  <tr>
+  <td><%= i %></td>
+  <td>
+  <figure class="image is-128x128 is-flex">
+  <%= attachment_image_tag rank, :post_image %>
+  </figure>
+  </td>
+  </tr>
+  <% end %>
+
+
+
+</div>
