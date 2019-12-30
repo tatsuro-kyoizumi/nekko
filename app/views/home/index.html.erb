@@ -1,0 +1,22 @@
+<div class="columns">
+  <div class="column is-8 is-offset-1">
+    <ul id="conversations-list">
+      <% @conversations.each do |conversation| %>
+        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="column is-3">
+    <div class="panel is-primary">
+      <p class="panel-heading">User List</p>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <% @users.each do |user| %>
+          <li><%= link_to user.name, conversations_path(user_id: user), remote: true, method: :post %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

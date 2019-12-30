@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # チャット関係
+  has_many :conversations, foreign_key: :sender_id
+  has_many :messages
 
   # refileによるプロフィール設定用
   attachment :profile_image

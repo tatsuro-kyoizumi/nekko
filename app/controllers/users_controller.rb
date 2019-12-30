@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  protect_from_forgery with: :exception
 
   def index
     @users = User.all
@@ -27,9 +28,7 @@ class UsersController < ApplicationController
     @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
     # @q = Post.ransack(params[:q])
     # @posts = @q.result(distinct: true)
-
   end
-
 
   def edit
     @user = User.find_by(id: params[:id])
@@ -47,6 +46,20 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def chat
+    @user = User.find_by(id: current_user.id)
+    @users =  @user.following.all
+
+     # conversationsが存在していればそれを代入、なければ空で返す
+     session[:conversations] ||= []
+
+     # フォローしているユーザーを取得
+     @users =  @user.following.all
+
+     # N+1問題を避けながら、conversationsを探す
+     @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
+
+  end
 
   def search_posts
     @posts = Post.within_box(3, current_user.latitude, current_user.longitude).where.not(user_id: current_user.id)

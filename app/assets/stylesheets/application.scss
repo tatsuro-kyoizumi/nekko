@@ -26,10 +26,12 @@
   //  font-family: 'Kosugi Maru', sans-serif;
  }
 
+
+
  .sidemenu{
    background-color:black;
    min-height: 100vh;
-   
+
 
  }
 
@@ -65,6 +67,31 @@
   transform : translate(0, 0);
 }
 
+
+.messages-list {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+.message-sent {
+  position: relative;
+  background-color: #D9EDF7;
+  border-color: #BCE8F1;
+  margin: 5px 20px;
+  padding: 10px;
+  float: right;
+}
+
+
+.message-received {
+  background-color: #F1F0F0;
+  border-color: #EEEEEE;
+  margin: 5px 20px;
+  padding: 10px;
+  float: left;
+}
 // .fadeIn{
 //   opacity:0;
 //   transform: translateY(20px);
