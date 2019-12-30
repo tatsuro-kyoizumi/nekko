@@ -38,6 +38,7 @@
         メニュー
       </p>
       <ul class="menu-list">
+        <% if user_signed_in? %>
         <li><%= link_to  users_path do %><i class="fas fa-home"></i>&nbsp;ホーム</li>
         <% end %>
         <li><%= link_to user_path(current_user.id) do %><i class="fas fa-user"></i>&nbsp;マイページ</li>
@@ -50,8 +51,10 @@
         <li><%= link_to search_posts_user_path(current_user.id) do %><i class="fas fa-search-plus"></i>&nbsp;近くの投稿を検索</li>
         <% end %>
 
-        <li><a>メッセージ</a></li>
 
+        <li><%= link_to chat_user_path(current_user.id) do %><i class="far fa-comments"></i>&nbsp;チャット</li>
+        <% end %>
+        <% end %>
       </ul>
 
     </aside>
