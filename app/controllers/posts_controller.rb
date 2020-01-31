@@ -9,7 +9,7 @@ def create
   @post = Post.new(post_params)
   @post.user_id = current_user.id
   @post.save
-  redirect_to users_path
+  redirect_to user_path(current_user.id)
 
 end
 
@@ -32,6 +32,7 @@ def edit
 end
 
 def update
+  @user = User.find_by(id: params[:id])
   @post = Post.find_by(id: params[:id])
   if @post.update(post_params)
     redirect_to user_path(@user.id)

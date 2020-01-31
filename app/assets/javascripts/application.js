@@ -15,7 +15,6 @@
 //= require activestorage
 //= require turbolinks
 //= require bulma
-//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
 //= require cocoon
 
@@ -44,15 +43,14 @@
         $('.tab-content .tab-pane').removeClass('is-block').eq(index).addClass('is-block')
       });
 
-    });
 
-    newFunction();
 
-function newFunction() {
-  $(document).on("turbolinks:load", function () {
-    $(window).fadeThis();
-  });
-}
+
+// function newFunction() {
+//   $(document).on("turbolinks:load", function () {
+//     $(window).fadeThis();
+//   });
+// }
 // ここまで
 
 // $(function(){
@@ -76,12 +74,13 @@ function newFunction() {
     var panel = $(this).parent().parent();
     var messages_list = panel.find('.messages-list');
 
-    panel.find('.panel-body').toggle();
+    panel.find('.panel-block').toggle();
     panel.attr('class', 'panel');
 
-    if (panel.find('.panel-body').is(':visible')){
+    if (panel.find('.panel-block').is(':visible')){
       var height = messages_list[0].scrollHeight;
       messages_list.scrollTop(height);
     }
   });
 })();
+});

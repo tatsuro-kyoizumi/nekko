@@ -14,19 +14,42 @@
     </div>
 
     <div class="panel-block" style="display: none;">
-      <%= form_for [conversation, conversation.messages.new], remote: true do |f| %>
-      <div class="field">
+      <form class="new_message">
+        <div class="field">
+          <div class="control">
+            <input name="conversation_id" class="input" type="hidden" value="<%= conversation.id %>">
+          </div>
+
+          <div class="control">
+            <input name="user_id" class="input" type="hidden" value="<%= user.id %>">
+          </div>
+
+          <div class="control">
+            <textarea name="body" class="input"></textarea>
+          </div>
+
+          <div class="control">
+            <input type="submit" class="button is-success" value="送信">
+          </div>
+        </div>
+        </form>
+        </div>
+        <!-- </div> -->
+
+
+      <%#= form_for [conversation, conversation.messages.new], remote: true do |f| %>
+      <!-- <div class="field">
         <div class="control">
-        <%= f.hidden_field :user_id, value: user.id %>
+        <%#= f.hidden_field :user_id, value: user.id %>
         </div>
         <div class="control">
-          <%= f.text_area :body, class: "input is-medium" %>
+          <%#= f.text_area :body, class: "input is-medium" %>
         </div>
         <div class="control">
-          <%= f.submit "送信", class: "button is-primary" %>
+          <%#= f.submit "送信", class: "button is-primary" %>
         </div>
       </div>
-      <% end %>
-    </div>
+      <%# end %>
+    </div> -->
     </article>
 </li>

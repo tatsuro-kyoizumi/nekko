@@ -62,7 +62,8 @@ class UsersController < ApplicationController
   end
 
   def search_posts
-    @posts = Post.within_box(3, current_user.latitude, current_user.longitude).where.not(user_id: current_user.id)
+    @user = User.find_by(id: current_user.id)
+    @posts = Post.within_box(3, current_user.latitude, current_user.longitude).where.not(user_id: current_user.id).order(created_at: :desc)
   end
 
   def search_users

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%#= csp_meta_tag %>
+    <%= action_cable_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
@@ -31,7 +32,9 @@
     <div class="columns">
       <div class="column is-2 sidemenu">
         <div class="navbar-brand">
-          <a href="#" class="navbar-item title is-marginless">猫はぶ</a>
+          <%= link_to root_path do %>
+          <%= image_tag "cat freaks logo.png" %>
+          <% end %>
         </div>
       <aside class="menu">
       <p class="menu-label">
@@ -39,29 +42,43 @@
       </p>
       <ul class="menu-list">
         <% if user_signed_in? %>
-        <li><%= link_to  users_path do %><i class="fas fa-home"></i>&nbsp;ホーム</li>
+        <li><%= link_to  users_path, :style => "color:aliceblue;" do %><i class="fas fa-home"></i>&nbsp;ホーム</li>
         <% end %>
-        <li><%= link_to user_path(current_user.id) do %><i class="fas fa-user"></i>&nbsp;マイページ</li>
+        <li><%= link_to user_path(current_user.id), :style => "color:aliceblue;" do %><i class="fas fa-user"></i>&nbsp;マイページ</li>
         <% end %>
-        <li><%= link_to new_post_path do %><i class="far fa-clipboard"></i>&nbsp;投稿する</li>
+        <li><%= link_to new_post_path, :style => "color:aliceblue;" do %><i class="far fa-clipboard"></i>&nbsp;投稿する</li>
         <% end %>
-        <li><%= link_to search_users_user_path(current_user.id) do %><i class="fas fa-search"></i>&nbsp;近くのユーザーを検索</li>
-        <% end %>
-
-        <li><%= link_to search_posts_user_path(current_user.id) do %><i class="fas fa-search-plus"></i>&nbsp;近くの投稿を検索</li>
+        <li><%= link_to search_users_user_path(current_user.id), :style => "color:aliceblue;" do %><i class="fas fa-search"></i>&nbsp;近くのユーザーを検索</li>
         <% end %>
 
+        <li><%= link_to search_posts_user_path(current_user.id), :style => "color:aliceblue;" do %><i class="fas fa-search-plus"></i>&nbsp;近くの投稿を検索</li>
+        <% end %>
 
-        <li><%= link_to chat_user_path(current_user.id) do %><i class="far fa-comments"></i>&nbsp;チャット</li>
+
+        <li><%= link_to chat_user_path(current_user.id), :style => "color:aliceblue;" do %><i class="far fa-comments"></i>&nbsp;チャット</li>
         <% end %>
+
+        <li><%= link_to destroy_user_session_path, {method: :delete, :style => "color:aliceblue;"} do %>
+          <i class="fas fa-sign-out-alt"></i>&nbsp;ログアウト</li>
+          <% end %>
+
+          <% else %>
+          <li><%= link_to new_user_session_path, :style => "color:aliceblue;" do %>
+            <i class="fas fa-sign-in-alt"></i>&nbsp;ログイン</li>
+            <% end %>
+
+          <li><%= link_to new_user_registration_path, :style => "color:aliceblue" do %><i class="fas fa-user-plus"></i>&nbsp;新規登録</li>
+          <% end %>
         <% end %>
+
+
       </ul>
 
     </aside>
     </div>
 
-  <div class="column is-10" style="padding-left:0px; padding-bottom:0px;">
-          <nav class="navbar is-warning" role="navigation" aria-label="Main navigation">
+  <div class="column is-10" style="padding-left:0px;">
+          <!-- <nav class="navbar is-warning" role="navigation" aria-label="Main navigation">
           <div class="container">
 
               <button class="button navbar-burger" data-target="navMenu">
@@ -69,22 +86,22 @@
                 <span></span>
 
               </button>
-            </div>
-            <div class="navbar-menu" id="navMenu">
+            </div> -->
+            <!-- <div class="navbar-menu" id="navMenu">
               <div class="navbar-end">
-                <% if user_signed_in? %>
-                <%= link_to 'ホーム', users_path, class:"navbar-item" %>
-                <%= link_to 'ログアウト', destroy_user_session_path, {method: :delete, class:"navbar-item"} %>
-                <%= link_to 'マイページ', user_path(current_user.id), class: "navbar-item" %>
+                <%# if user_signed_in? %>
+                <%#= link_to 'ホーム', users_path, class:"navbar-item" %>
+                <%#= link_to 'ログアウト', destroy_user_session_path, {method: :delete, class:"navbar-item"} %>
+                <%#= link_to 'マイページ', user_path(current_user.id), class: "navbar-item" %>
 
 
-                <% else %>
-                <%= link_to 'ログイン', new_user_session_path, class:"navbar-item" %>
-                <%= link_to '新規登録', new_user_registration_path, class:"navbar-item" %>
-                <% end %>
+                <%# else %>
+                <%#= link_to 'ログイン', new_user_session_path, class:"navbar-item" %>
+                <%#= link_to '新規登録', new_user_registration_path, class:"navbar-item" %>
+                <%# end %>
               </div>
 
-            </div>
+            </div> -->
 
         </nav>
 

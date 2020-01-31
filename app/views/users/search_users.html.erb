@@ -1,6 +1,33 @@
-<h1>ユーザー検索結果</h1>
 
-<% @users.each do |user| %>
-<%= user.name %>
 
-<% end %>
+<h1 class="title"><strong><i class="fas fa-rss"></i>&nbsp;ユーザー検索結果(3km圏内)</strong></h1>
+  <hr>
+
+
+
+    <div class="columns is-multiline">
+      <% @users.each do |user| %>
+        <div class="column is-2">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= attachment_image_tag user, :profile_image, fallback:"no_image.jpg" %>
+              </figure>
+            </div>
+
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6"><%= link_to user.name, user_path(user.id) %></p>
+                </div>
+              </div>
+
+              <div class="content">
+                <p><small><%= user.introduction %></small></p>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    <% end %>
+  </div>

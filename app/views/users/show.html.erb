@@ -1,4 +1,4 @@
-<div class="hero is-warning is-small" style="margin-left:-12px;">
+<div class="hero is-warning is-small">
   <div class="hero-body">
     <div class="container">
       <h1 class="title"><%= @user.name %></h1>
@@ -23,7 +23,7 @@
     <div class="level-items tabs">
       <ul id="tabs">
         <li class="tab is-active" data-target="#tab1"><a>投稿一覧</a></li>
-        <li class="tab" data-target="#tab2"><a>ぬっこ友の投稿</a></li>
+        <li class="tab" data-target="#tab2"><a>フォローユーザーの投稿</a></li>
         <li class="tab" data-target="#tab3"><a>お気に入り写真</a></li>
       </ul>
     </div>
@@ -37,32 +37,32 @@
   </div>
 </section>
 
-<main class="columns">
+<main class="columns" style="margin-left:0px">
   <!-- <div class="column is-1"></div> -->
-  <div class="submenu column is-3 is-offset-1">
+  <!-- <div class="submenu column is-3 is-offset-1">
     <aside class="box has-text-centered">
       <!-- 猫ねこネコ -->
-      <% if @user.id == current_user.id %>
-      <%= link_to '近くの投稿を探す', search_posts_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
-      <%= link_to '近くのユーザーを探す', search_users_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
+      <%# if @user.id == current_user.id %>
+      <%#= link_to '近くの投稿を探す', search_posts_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
+      <%#= link_to '近くのユーザーを探す', search_users_user_path(@user.id), class:"button menu is-danger is-outlined" %><br>
       <%#= search_form_for @q do |f| %>
       <%#= f.search_field :name_cont %>
       <%#= f.submit '検索' %>
       <%# end %>
 
 
-      <% end %>
-    </aside>
+      <%# end %>
+    <!-- </aside> -->
 
-    <aside class="menu box">
+    <!-- <aside class="menu box"> -->
       <%#= render 'new', user: current_user, post: @post %>
       <%#= render partial: "posts/new", locals: { post: @post, post_picture: @post_picture } %>
-    </aside>
-  </div>
+    <!-- </aside>
+  </div> -->
 
   <!-- 投稿一覧 -->
 
-  <div class="column is-7">
+  <div class="column is-10 is-offset-1">
     <div class="tab-content">
 
 <!-- ここからtab1 -->
@@ -78,7 +78,7 @@
 
       <div class="media-content">
         <div class="content">
-          <p><strong><%= post.user.name %></strong>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
+          <p><strong><%= post.user.name %></strong>&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;&ensp; &ensp; &ensp; &ensp; &ensp;&ensp; &ensp; &ensp; &ensp; &ensp;&ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp;
             <% if @user.id == current_user.id %>
             <%= link_to edit_post_path(post.id) do %>
             <i class="fas fa-edit"></i>
