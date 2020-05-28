@@ -39,7 +39,7 @@ gem 'rails-i18n'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem "geocoder"
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 # gem 'gimei'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'ransack'
